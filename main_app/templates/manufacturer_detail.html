@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block title %} {{manufacturer.name}}'s best modules {% endblock %}
+{% block content %}
+<div class="detail__img">
+    <img src="{{artist.img}}" alt="{{artist.name}}" />
+</div>
+<div class="detail__name">
+    <h1 class="title">{{manufacturer.name}}</h1>
+</div>
+<div class="detail__container">
+    <div class="buttons">
+        <a href="{% url 'manufacturer_update' manufacturer.pk %}" class="button is-info">
+            <span class="icon">
+                <i class="fas fa-edit"></i>
+            </span>
+        </a>
+        <a href="/manufacturers/{{manufacturer.id}}/delete" class="button is-danger">
+            <span class="icon">
+                <i class="fas fa-trash-alt"></i>
+            </span>
+        </a>
+    </div>
+    <div class="detail__modules mb-5">
+        <h3 class="title is-3">modules</h3>
+
+        <form class="mb-5" action="{% url 'module_create' artist.pk %}" method="post">
+            {% csrf_token %}
+            <div class="field has-addons">
+                <div class="control">
+                    <input
+                        class="input"
+                        type="text"
+                        name="title"
+                        placeholder="Title"
+                        required
+                    />
+                </div>
+                <div class="control">
+                    <input
+                        class="input"
+                        type="number"
+                        name="minutes"
+                        placeholder="Length in Minutes"
+                        min="0"
+                        required
+                    />
+                </div>
+                <div class="control">
+                    <input
+                        class="input"
+                        type="number"
+                        name="seconds"
+                        placeholder="Length in Seconds"
+                        min="0"
+                        required
+                    />
+                </div>
+                <div class="control">
+                    <input class="button is-primary" type="submit" value="Add module" />
+                </div>
+            </div>
+        </form>
+
+        {% for store in manufacturer.store.all %}
+            <div class="module">
+                <span>{{forloop.counter}}</span>
+                <span><b>{{module.title}}</b></span>
+                <span>{{module.get_length}}</span>
+            </div>
+        {% empty %}
+            <article class="message">
+                <div class="message-header">
+                    <p>No modules Available</p>
+                </div>
+            </article>
+
+        {% endfor %}
+    </div>
+    <div class="detail__about">
+        <h4 class="title is-4">About</h4>
+        <p>{{artist.bio}}</p>
+    </div>
+</div>
+
+{% endblock %}
