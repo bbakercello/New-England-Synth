@@ -2,7 +2,7 @@
 {% block title %} {{manufacturer.name}}'s best modules {% endblock %}
 {% block content %}
 <div class="detail__img">
-    <img src="{{artist.img}}" alt="{{artist.name}}" />
+    <img src="{{manufacturer.img}}" alt="{{manufacturer.name}}" />
 </div>
 <div class="detail__name">
     <h1 class="title">{{manufacturer.name}}</h1>
@@ -23,49 +23,56 @@
     <div class="detail__modules mb-5">
         <h3 class="title is-3">modules</h3>
 
-        <form class="mb-5" action="{% url 'module_create' artist.pk %}" method="post">
+        <form class="mb-5" action="{% url 'module_create' manufacturer.pk %}" method="post">
             {% csrf_token %}
             <div class="field has-addons">
                 <div class="control">
                     <input
-                        class="input"
-                        type="text"
-                        name="title"
-                        placeholder="Title"
-                        required
+                    class="input"
+                    type="text"
+                    name="name"
+                    placeholder="Name"
+                    required
                     />
                 </div>
                 <div class="control">
                     <input
-                        class="input"
-                        type="number"
-                        name="minutes"
-                        placeholder="Length in Minutes"
-                        min="0"
-                        required
+                    class="input"
+                    type="text"
+                    name="img"
+                    placeholder="Image"
+                    required
                     />
                 </div>
                 <div class="control">
                     <input
-                        class="input"
-                        type="number"
-                        name="seconds"
-                        placeholder="Length in Seconds"
-                        min="0"
-                        required
+                    class="input"
+                    type="text"
+                    name="info"
+                    placeholder="Info"
+                    required
                     />
                 </div>
                 <div class="control">
-                    <input class="button is-primary" type="submit" value="Add module" />
+                    <input
+                    class="input"
+                    type="text"
+                    name="function"
+                    placeholder="Function"
+                    required
+                    />
                 </div>
+                <div class="control">
+                    <input class="button is-primary" type="submit" value="Add Song" />
+                </div>    
             </div>
         </form>
 
         {% for store in manufacturer.store.all %}
             <div class="module">
                 <span>{{forloop.counter}}</span>
-                <span><b>{{module.title}}</b></span>
-                <span>{{module.get_length}}</span>
+                <span><b>{{module.name}}</b></span>
+                <span>{{module.function}}</span>
             </div>
         {% empty %}
             <article class="message">
@@ -75,11 +82,7 @@
             </article>
 
         {% endfor %}
-    </div>
-    <div class="detail__about">
-        <h4 class="title is-4">About</h4>
-        <p>{{artist.bio}}</p>
-    </div>
+    </div> 
 </div>
 
 {% endblock %}

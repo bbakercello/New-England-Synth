@@ -2,8 +2,9 @@ from django.db import models
 
 # Create your models here.
 class Manufacturer(models.Model):
-    name = models.CharField(max_length=150, default="BLANK")
-    img = models.CharField(max_length=250, default="BLANK")
+    name = models.CharField(max_length=150)
+    img = models.CharField(max_length=250)
+    
 
     def __Str__(self):
         return self.name
@@ -16,7 +17,7 @@ class Module(models.Model):
     img = models.CharField(max_length=250)
     info = models.TextField(max_length=500)
     function = models.CharField(max_length=200)
-    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE, related_name="manufacturer", default="BLANK")
+    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE, related_name="modules")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __Str__(self):
