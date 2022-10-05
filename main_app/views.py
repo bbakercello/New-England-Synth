@@ -45,6 +45,11 @@ class ManufacturerDetail(DetailView):
     model = Manufacturer
     template_name = "manufacturer_detail.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["stores"] = Store.objects.all()
+        return context
+
 class ManufacturerUpdate(UpdateView):
     model = Manufacturer
     fields = ['name', 'img']
@@ -69,3 +74,18 @@ class ModuleCreate(View):
         theManufacturer = Manufacturer.objects.get(pk=pk)
         Module.objects.create(name=formTitle, img=img,info=info, function=function, manufacturer=theManufacturer)
         return redirect('manufacturer_detail', pk=pk)
+
+class StoreModuleAssoc(View):
+
+    def get(self, request, pk, module_pk):
+        # get the query param from the url
+        assoc = request.GET.get("assoc")
+        if assoc == "remove":
+            # get the Store by the id and
+            # remove from the join table the given module_id
+            Store.objects.get(pk=pk).modules.remove(module_pk)
+        if assoc == "add":
+            # get the Store by the id and
+            # add to the join table the given module_id
+            Store.objects.get(pk=pk).Modules.add(module_pk)
+        return redirect('home')

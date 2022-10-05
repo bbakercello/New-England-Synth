@@ -68,12 +68,43 @@
             </div>
         </form>
 
-        {% for module in manufacturer.module.all %}
+        {% for module in module.all %}
             <div class="module">
                 <span>{{forloop.counter}}</span>
                 <span><b>{{module.name}}</b></span>
                 <span>{{module.function}}</span>
             </div>
+            <span>
+                <div class="dropdown">
+                  <div class="dropdown-trigger">
+                    <button
+                      class="button"
+                      aria-haspopup="true"
+                      aria-controls="dropdown-menu"
+                    >
+                      <span>Add to Store</span>
+                      <span class="icon is-small">
+                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                      </span>
+                    </button>
+                  </div>
+                  <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                    <div class="dropdown-content">
+                      {% for store in stores %}
+                  <!-- each playlist becomes a drop
+                  down item with the ids needed to add to the join table  -->
+                      <a
+                        href="{% url 'store_module_assoc' store.pk module.pk %}?assoc=add"
+                        class="dropdown-item"
+                      >
+                        {{store.title}}
+                      </a>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </span>
+
         {% empty %}
             <article class="message">
                 <div class="message-header">
@@ -83,6 +114,66 @@
 
         {% endfor %}
     </div> 
+    <form class="mb-5" action="{% url 'module_create' manufacturer.pk %}" method="post">
+        {% csrf_token %}
+        <div class="field has-addons">
+        <div class="control">
+            <input
+            class="input"
+            type="text"
+            name="name"
+            placeholder="name"
+            required
+            />
+        </div>
+        <div class="control">
+            <input
+            class="input"
+            type="text"
+            name="img"
+            placeholder="Image Link"
+            required
+            />
+        </div>
+        <div class="control">
+            <input
+            class="input"
+            type="text"
+            name="info"
+            placeholder="More information"
+            required
+            />
+        </div>
+        <div class="control">
+            <input
+            class="input"
+            type="text"
+            name="function"
+            placeholder="Module Function"
+            required
+            />
+        </div>
+        <div class="control">
+            <input class="button is-primary" type="submit" value="Add Song" />
+        </div>
+        </div>
+    </form>
+
+<!-- before the for loop for songs -->
+
+    <!--  above about section  -->
+    <a href="{% url 'manufacturer_update' manufacturer.pk %}" class="button is-info">
+        <span class="icon">
+          <i class="fas fa-edit"></i>
+        </span>
+      </a>
+    <a href="{% url 'manufacturer_delete' manufacturer.pk %}" class="button is-danger">
+      <span class="icon">
+        <i class="fas fa-trash-alt"></i>
+      </span>
+    </a>
+  </div>
+
 </div>
 
 {% endblock %}
