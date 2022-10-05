@@ -86,7 +86,7 @@ class ManufacturerDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['stores'] = Store.objects.all()
-        context['modules'] = 
+        context ['modules'] = Module.objects.all()
         return context
 
 # @method_decorator(login_required, name='dispatch')

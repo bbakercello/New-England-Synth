@@ -56,7 +56,6 @@
 
         {% endfor %}
     </div>
-
         <form class="mb-5" action="{% url 'module_create' manufacturer.pk %}" method="post">
             {% csrf_token %}
             <div class="field has-addons">
