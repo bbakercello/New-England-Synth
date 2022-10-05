@@ -63,12 +63,12 @@
                     />
                 </div>
                 <div class="control">
-                    <input class="button is-primary" type="submit" value="Add Song" />
+                    <input class="button is-primary" type="submit" value="Add Module" />
                 </div>    
             </div>
         </form>
 
-        {% for store in manufacturer.store.all %}
+        {% for module in manufacturer.module.all %}
             <div class="module">
                 <span>{{forloop.counter}}</span>
                 <span><b>{{module.name}}</b></span>

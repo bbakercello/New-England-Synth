@@ -17,7 +17,7 @@ class Module(models.Model):
     img = models.CharField(max_length=250)
     info = models.TextField(max_length=500)
     function = models.CharField(max_length=200)
-    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE, related_name="modules")
+    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE, related_name="module")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __Str__(self):

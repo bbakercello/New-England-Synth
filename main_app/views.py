@@ -35,7 +35,7 @@ class ManufacturerDetail(DetailView):
 
 class ManufacturerUpdate(UpdateView):
     model = Manufacturer
-    fields = ['name', 'img', 'bio', 'verified_manufacturer']
+    fields = ['name', 'img']
     template_name = "manufacturer_update.html"
     success_url = "/manufacturers/"
 
