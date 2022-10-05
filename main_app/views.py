@@ -2,11 +2,23 @@ from django.shortcuts import redirect
 from django.views import View
 from django.urls import reverse
 from django.views.generic.base import TemplateView
-from .models import Manufacturer,Module
+from .models import Manufacturer,Module,Store
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 # after our other imports 
 from django.views.generic import DetailView
 #         return HttpResponse("New England Synth Home")
+
+
+
+class Home(TemplateView):
+    template_name = "home.html"
+
+    # adding store context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['stores'] = Store.objects.all()
+        return context
+
 
 class ManufacturerList(TemplateView):
     template_name = "manufacturer_list.html"

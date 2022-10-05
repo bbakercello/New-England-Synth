@@ -26,5 +26,11 @@ class Module(models.Model):
     class Meta:
         ordering = ['name']
 
+class Store(models.Model):
+    title = models.CharField(max_length=150)
+    modules = models.ManyToManyField(Module)
+
+    def __str__(self):
+        return self.title
 
 
