@@ -21,4 +21,4 @@ urlpatterns = [
     path('', include('main_app.urls'))
 ]
 
-#random comm
+#random com
