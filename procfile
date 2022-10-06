@@ -1,1 +1,1 @@
-web: gunicorn ne_sy.wsgi
+web: gunicorn ne_synth_project.wsgi
