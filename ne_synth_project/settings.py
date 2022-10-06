@@ -72,7 +72,7 @@ WSGI_APPLICATION = 'ne_synth_project.wsgi.application'
 
 
 # Databas
-# https://docs.djangoproject.com/en/4.1/ref/settings/#dat
+# https://docs.djangoproject.com/en/4.1/ref/settings/#
 
 DATABASES = {
     'default': {
