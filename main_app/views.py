@@ -149,4 +149,4 @@ class StoreModuleAssoc(View):
 #             login(request, user)
 #             return redirect("manufacturer_list")
 #         else:
-#             return redirect("signup")
+#             return redirect("si
