@@ -10,7 +10,7 @@
 
     <div class="detail__modules mb-5">
         <h3 class="title is-3">Modules</h3>
-        {% for module in manufacturer.modules.all %}
+        {% for module in manufacturer.module.all %}
         <div class="module">
         <span>{{forloop.counter}}</span>
         <span><b>{{module.name}}</b></span>

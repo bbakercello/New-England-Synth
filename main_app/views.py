@@ -1,4 +1,5 @@
 # at top of file
+from email.mime import image
 from django.shortcuts import redirect, render
 from django.views import View
 from django.urls import reverse
